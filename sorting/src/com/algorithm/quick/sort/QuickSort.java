@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class QuickSort {
 	
-	public static void performQuickSort(Integer[] input, int low, int high) {
+	private static void performQuickSort(Integer[] input, int low, int high) {
 		if (high < low) {
 			return;
 		}
@@ -24,9 +24,7 @@ public class QuickSort {
 			}
 
 			if (i <= j) {
-				int temp = input[j];
-				input[j] = input[i];
-				input[i] = temp;
+				swap(input, i, j);
 				i++;
 				j--;
 			}
@@ -39,15 +37,21 @@ public class QuickSort {
 		}
 	}
 	
+	private static void swap(Integer[] input, int index1, int index2) {
+		int temp = input[index1];
+		input[index1] = input[index2];
+		input[index2] = temp;
+	}
+	
 	public static void main(String[] args) {
-		Integer[] input = { 13, 11, 8, 2, 9, 1, 4, 8, 9, 3 };
-		//Integer[] input = buildInput();
+		//Integer[] input = { 13, 11, 8, 2, 9, 1, 4, 8, 9, 3 };
+		Integer[] input = buildInput();
 		System.out.println("Before sorting => " + Arrays.asList(input));
 		performQuickSort(input, 0, input.length - 1);
 		System.out.println("After sorting => " + Arrays.asList(input));
 	}
 
-	static Integer[] buildInput() {
+	private static Integer[] buildInput() {
 		List<Integer> list = new ArrayList<>();
 		System.out.println("Enter Integer values for sorting. enter \"q\" to finish.");
 		try (Scanner scanner = new Scanner(System.in)) {
